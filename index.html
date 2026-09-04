@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HELLGUARD SMP - India's Best Survival Minecraft Server</title>
+  <meta name="description" content="Join Hellguard SMP - India's premier survival Minecraft server. Ranks, crates, active staff, custom features, minimal lag." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Rajdhani:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- Interactive Fire Embers Canvas Background -->
+  <canvas id="fire-canvas"></canvas>
+
+  <!-- Navigation Bar (Pill buttons: Home | Store | Rewards | Rules | Staff) -->
+  <header class="navbar">
+    <div class="nav-pill-container">
+      <button type="button" class="nav-pill active" onclick="switchTab('home')" data-tab="home">Home</button>
+      <button type="button" class="nav-pill" onclick="switchTab('store')" data-tab="store">Store</button>
+      <button type="button" class="nav-pill" onclick="switchTab('rewards')" data-tab="rewards">Rewards</button>
+      <button type="button" class="nav-pill" onclick="switchTab('rules')" data-tab="rules">Rules</button>
+      <button type="button" class="nav-pill" onclick="switchTab('staff')" data-tab="staff">Staff</button>
+      <button type="button" class="nav-pill" onclick="switchTab('about')" data-tab="about">About</button>
+    </div>
+  </header>
+
+  <!-- MAIN TAB CONTENT CONTAINER -->
+  <main class="main-content-wrapper">
+
+    <!-- ==================== TAB 1: HOME ==================== -->
+    <section id="tab-home" class="tab-pane active">
+      <!-- HERO SECTION -->
+      <div class="hero-section">
+        <div class="hero-content">
+          <div class="logo-wrapper floating">
+            <img src="assets/images/hellguard_logo.png" alt="Hellguard SMP Logo" class="hero-logo" />
+          </div>
+
+          <div class="tagline-pill">✦ BEST SURVIVAL SMP ✦</div>
+          <h1 class="hero-title">INDIA'S BEST SURVIVAL MINECRAFT SERVER</h1>
+          <p class="hero-subtitle">
+            Experience an exciting Survival SMP with custom features, a friendly community, regular events, and smooth gameplay. Build, explore, trade, and compete with players from around the world. Join now and start your adventure!
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="cta-group">
+            <button id="copyIpBtn" class="btn btn-primary glow" onclick="copyServerIp()">
+              <span class="btn-icon">📋</span>
+              <span class="btn-text">hellguard.abrdns.com</span>
+              <span class="copy-badge">CLICK TO COPY</span>
+            </button>
+
+            <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="btn btn-discord">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.077.077 0 0 1-.006.128c-.598.344-1.22.645-1.873.891-.043.017-.062.066-.041.107.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+              <span>Join Discord Server</span>
+            </a>
+          </div>
+
+          <!-- SERVER STATUS SECTION -->
+          <div class="server-status-container">
+            <h2 class="server-status-heading">
+              <span class="status-signal-dot pulsating"></span>
+              SERVER STATUS
+            </h2>
+
+            <div class="status-cards-stack">
+              <!-- Card 1: Status -->
+              <div class="status-stack-card">
+                <span class="stack-card-title">Status</span>
+                <span class="stack-card-val status-val" id="serverStatusText">Online</span>
+              </div>
+
+              <!-- Card 2: Players -->
+              <div class="status-stack-card">
+                <span class="stack-card-title">Players</span>
+                <span class="stack-card-val" id="playerCount">0 / 100</span>
+              </div>
+
+              <!-- Card 3: IP (Click to Copy) -->
+              <div class="status-stack-card ip-card" onclick="copyServerIp()" title="Click to copy IP">
+                <span class="stack-card-title">IP</span>
+                <span class="stack-card-val ip-val">hellguard.abrdns.com</span>
+                <span class="ip-copy-hint">CLICK TO COPY</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PLAYER REVIEWS SECTION (Server Status Ke Theek Niche) -->
+          <div class="player-reviews-section">
+            <h2 class="player-reviews-title">PLAYER REVIEWS</h2>
+
+            <!-- Leave a Review Box -->
+            <div class="leave-review-card">
+              <div class="leave-review-header">
+                <span class="review-header-icon">✍️</span>
+                <span class="leave-review-title">LEAVE A REVIEW</span>
+              </div>
+
+              <form id="reviewForm" class="review-form">
+                <div class="review-input-group">
+                  <label for="reviewUsername">Minecraft Username</label>
+                  <input type="text" id="reviewUsername" placeholder="e.g. Steve" required autocomplete="off" />
+                </div>
+
+                <div class="review-input-group">
+                  <label for="reviewRating">Rating</label>
+                  <div class="custom-select-wrapper">
+                    <select id="reviewRating">
+                      <option value="5">★★★★★ (5/5)</option>
+                      <option value="4">★★★★☆ (4/5)</option>
+                      <option value="3">★★★☆☆ (3/5)</option>
+                      <option value="2">★★☆☆☆ (2/5)</option>
+                      <option value="1">★☆☆☆☆ (1/5)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="review-input-group">
+                  <label for="reviewFeedback">Your Feedback</label>
+                  <textarea id="reviewFeedback" rows="4" placeholder="Share your experience on Hellguard SMP..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-post-review">POST REVIEW</button>
+              </form>
+            </div>
+
+            <!-- Community Feedback Header & Toggle -->
+            <div class="community-feedback-header">
+              <h3 class="community-feedback-title">COMMUNITY<br />FEEDBACK</h3>
+              <button type="button" id="toggleReviewsBtn" class="btn-toggle-reviews">
+                <span id="toggleReviewsText">Hide Reviews</span>
+                <span id="toggleReviewsArrow" class="arrow-up">▲</span>
+              </button>
+            </div>
+
+            <!-- Reviews List Container -->
+            <div id="reviewsList" class="reviews-list-container">
+              <div class="review-item">
+                <div class="reviewer-avatar">
+                  <img src="https://mc-heads.net/avatar/ShadowBlade_99/48" alt="ShadowBlade_99" onerror="this.src='https://mc-heads.net/avatar/Steve/48'" />
+                </div>
+                <div class="review-item-content">
+                  <div class="reviewer-name">ShadowBlade_99</div>
+                  <div class="reviewer-stars">★★★★★</div>
+                  <p class="review-comment">"Best SMP server I've played on! The PVP mechanics and community are top-tier."</p>
+                </div>
+              </div>
+
+              <div class="review-item">
+                <div class="reviewer-avatar">
+                  <img src="https://mc-heads.net/avatar/CrafterPro/48" alt="CrafterPro" onerror="this.src='https://mc-heads.net/avatar/Steve/48'" />
+                </div>
+                <div class="review-item-content">
+                  <div class="reviewer-name">CrafterPro</div>
+                  <div class="reviewer-stars">★★★★★</div>
+                  <p class="review-comment">"Smooth gameplay with zero lag! Weekly events aur custom crates bohot badhiya hain."</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- WHY CHOOSE HELLGUARDSMP -->
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-kicker">COMMUNITY & STABILITY</span>
+          <h2 class="section-title">WHY CHOOSE <span class="accent-text">HELLGUARDSMP</span></h2>
+          <div class="flame-line"></div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🤝</div>
+            <h3>Friendly Community</h3>
+            <p>Meet amazing players and make new friends every day.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Smooth Gameplay</h3>
+            <p>Optimized server with minimal lag and stable performance.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎁</div>
+            <h3>Weekly Rewards</h3>
+            <p>Special reward codes every Sunday.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>Active Staff</h3>
+            <p>Friendly and active staff always ready to help.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⚔️</div>
+            <h3>Survival Features</h3>
+            <p>Claims, economy, crates, ranks and much more.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">👑</div>
+            <h3>Premium Experience</h3>
+            <p>Unique gameplay designed for long-term fun.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 2: STORE ==================== -->
+    <section id="tab-store" class="tab-pane">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="store-banner-wrapper floating">
+            <img src="assets/images/store_banner.png" alt="Hellguard Store" class="section-banner-img" />
+          </div>
+          <div class="store-subtext">Ranks • Keys • Money • Claim Blocks</div>
+          <p class="store-instruction">Buy items through Discord tickets. Send username + payment screenshot.</p>
+          <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="btn btn-store-discord">
+            🛒 Buy Through Discord
+          </a>
+          <div class="flame-line"></div>
+        </div>
+
+        <!-- RANKS CARDS -->
+        <h3 class="subsection-title">🔥 SERVER RANKS</h3>
+        <div class="ranks-grid">
+          <!-- Hero Rank -->
+          <div class="rank-card hero-border">
+            <div class="rank-header">
+              <span class="rank-badge">Tier I</span>
+              <h4>HERO RANK</h4>
+              <div class="rank-price">₹99</div>
+            </div>
+            <div class="rank-preview">
+              Protection IX Armor Kit, ₹500k In-Game Money, Prefix...
+            </div>
+            <div class="rank-actions">
+              <button class="btn-perk" onclick="openPerkModal('hero')">Perks</button>
+              <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="btn-buy">Buy Rank</a>
+            </div>
+          </div>
+
+          <!-- Boss Rank -->
+          <div class="rank-card boss-border">
+            <div class="rank-header">
+              <span class="rank-badge">Tier II</span>
+              <h4>BOSS RANK</h4>
+              <div class="rank-price">₹160</div>
+            </div>
+            <div class="rank-preview">
+              Protection VIII Armor Kit, ₹500k Money, 6x Crate Keys...
+            </div>
+            <div class="rank-actions">
+              <button class="btn-perk" onclick="openPerkModal('boss')">Perks</button>
+              <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="btn-buy">Buy Rank</a>
+            </div>
+          </div>
+
+          <!-- Eternal Rank -->
+          <div class="rank-card eternal-border">
+            <div class="rank-header">
+              <span class="rank-badge">Tier III</span>
+              <h4>ETERNAL RANK</h4>
+              <div class="rank-price">₹200</div>
+            </div>
+            <div class="rank-preview">
+              Protection IX Armor, ₹1,000,000 Money, 11x Keys...
+            </div>
+            <div class="rank-actions">
+              <button class="btn-perk" onclick="openPerkModal('eternal')">Perks</button>
+              <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="btn-buy">Buy Rank</a>
+            </div>
+          </div>
+
+          <!-- Deadliest Rank -->
+          <div class="rank-card deadliest-border">
+            <div class="rank-header">
+              <span class="rank-badge popular-tag">MOST POPULAR</span>
+              <h4>DEADLIEST RANK</h4>
+              <div class="rank-price">₹250</div>
+            </div>
+            <div class="rank-preview">
+              Protection X Armor, ₹1,000,000 Money, Ace Key + 16x Keys...
+            </div>
+            <div class="rank-actions">
+              <button class="btn-perk" onclick="openPerkModal('deadliest')">Perks</button>
+              <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="btn-buy">Buy Rank</a>
+            </div>
+          </div>
+
+          <!-- Ace Rank -->
+          <div class="rank-card ace-border godlike">
+            <div class="rank-header">
+              <span class="rank-badge supreme-tag">SUPREME</span>
+              <h4>ACE RANK</h4>
+              <div class="rank-price">₹300</div>
+            </div>
+            <div class="rank-preview">
+              Protection XII Armor, ₹2M Money, 30x Keys, 1 Max Out Mace!
+            </div>
+            <div class="rank-actions">
+              <button class="btn-perk" onclick="openPerkModal('ace')">Perks</button>
+              <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="btn-buy highlight-buy">Buy Rank</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- KEYS STORE -->
+        <div class="keys-section">
+          <div class="keys-header">
+            <span class="keys-symbol">🗝️</span>
+            <h3>HELLGUARD SMP KEY STORE</h3>
+            <span class="keys-symbol">🗝️</span>
+          </div>
+          <div class="keys-grid">
+            <div class="key-card">
+              <span class="status-dot-green"></span>
+              <span class="key-name">ACE KEY</span>
+              <span class="key-price">40₹</span>
+              <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="key-buy-link">Buy</a>
+            </div>
+            <div class="key-card">
+              <span class="status-dot-green"></span>
+              <span class="key-name">DEADLY KEY</span>
+              <span class="key-price">30₹</span>
+              <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="key-buy-link">Buy</a>
+            </div>
+            <div class="key-card">
+              <span class="status-dot-green"></span>
+              <span class="key-name">ETERNAL KEY</span>
+              <span class="key-price">29₹</span>
+              <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="key-buy-link">Buy</a>
+            </div>
+            <div class="key-card">
+              <span class="status-dot-green"></span>
+              <span class="key-name">BOSS KEY</span>
+              <span class="key-price">20₹</span>
+              <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="key-buy-link">Buy</a>
+            </div>
+            <div class="key-card">
+              <span class="status-dot-green"></span>
+              <span class="key-name">HERO KEY</span>
+              <span class="key-price">9₹</span>
+              <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="key-buy-link">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: REWARDS (UPDATES) ==================== -->
+    <section id="tab-rewards" class="tab-pane">
+      <div class="section-container update-bg">
+        <div class="section-header">
+          <div class="rewards-banner-wrapper floating">
+            <img src="assets/images/rewards_banner.png" alt="Hellguard Rewards" class="section-banner-img" />
+          </div>
+          <div class="store-subtext">Everyday New Events and Rewards</div>
+          <span class="section-kicker">WHAT'S NEW</span>
+          <h2 class="section-title">LATEST <span class="accent-text">REWARDS & UPDATES</span></h2>
+          <div class="flame-line"></div>
+        </div>
+
+        <div class="updates-box">
+          <div class="season-badge">
+            <span class="pulse-beacon"></span>
+            <h3>Season 1 Live</h3>
+          </div>
+          <ul class="update-list">
+            <li>
+              <span class="check-bullet">🔥</span>
+              <span>Fresh survival world with new economy and features.</span>
+            </li>
+            <li>
+              <span class="check-bullet">⚔️</span>
+              <span>AFK Arena has been added.</span>
+            </li>
+            <li>
+              <span class="check-bullet">✨</span>
+              <span>Nothing banned for this season.</span>
+            </li>
+            <li>
+              <span class="check-bullet">🏆</span>
+              <span>Weekly EVENTs and rewards every Sunday!</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 4: RULES ==================== -->
+    <section id="tab-rules" class="tab-pane">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="rules-banner-wrapper floating">
+            <img src="assets/images/rules_banner.png" alt="Hellguard Rules" class="rules-box-img" />
+          </div>
+          <div class="store-subtext">Play Fair • Respect Everyone • Enjoy The Game</div>
+          <p class="store-instruction">Please read all rules carefully. Breaking server rules may result in punishments.</p>
+          <div class="flame-line"></div>
+        </div>
+
+        <div class="rules-wrapper">
+          <div class="rules-column">
+            <h3 class="rules-title">🛡️ SERVER RULES</h3>
+            <div class="rules-list-grid">
+              <div class="rule-item"><span class="rule-x">❌</span> No Hacked Clients</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No Movement Mods</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No Inventory Mods</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No Health Indicators</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No Radar</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No Freecam</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No Auto Place</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No Harmful Macros or Scripts</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No Abusing Bugs</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No VPE Methods</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No IRL Trading</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No Invite Rewards</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No Cross Server Trading</div>
+              <div class="rule-item"><span class="rule-x">❌</span> No Finding or Using The Seed</div>
+            </div>
+          </div>
+
+          <div class="punishments-column">
+            <h3 class="rules-title">⚖️ PUNISHMENTS</h3>
+            <div class="punishment-card warning">
+              <div class="punishment-badge">Level 1</div>
+              <h4>Warning</h4>
+              <p>Minor rule violations may result in a warning.</p>
+            </div>
+            <div class="punishment-card tempban">
+              <div class="punishment-badge">Level 2</div>
+              <h4>Temporary Ban</h4>
+              <p>Repeated offences may result in a temporary ban.</p>
+            </div>
+            <div class="punishment-card permban">
+              <div class="punishment-badge">Level 3</div>
+              <h4>Permanent Ban</h4>
+              <p>Severe cheating or exploiting may result in a permanent ban.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: STAFF ==================== -->
+    <section id="tab-staff" class="tab-pane">
+      <div class="section-container">
+        <div class="section-header">
+          <div class="staff-banner-wrapper floating">
+            <img src="assets/images/staff_banner.png" alt="Hellguard SMP Staff" class="section-banner-img" />
+          </div>
+          <h2 class="section-title">Meet The Team Behind <span class="accent-text">Hellguard SMP</span></h2>
+          <p class="store-instruction">Our staff team works hard to keep the server safe, fair and enjoyable for everyone.</p>
+          <div class="flame-line"></div>
+        </div>
+
+        <div class="staff-cards-wrapper">
+          <!-- Founder -->
+          <div class="staff-card founder-glow">
+            <div class="staff-avatar-container">
+              <img src="https://mc-heads.net/avatar/rehan_playz/120" alt="rehan_playz" class="staff-avatar floating-avatar" />
+              <div class="crown-icon">👑</div>
+            </div>
+            <div class="staff-role founder-role">FOUNDER</div>
+            <h4 class="staff-username">rehan_playz</h4>
+            <div class="staff-desc">Founder & Visionary of Hellguard SMP</div>
+          </div>
+
+          <!-- Owner -->
+          <div class="staff-card owner-glow">
+            <div class="staff-avatar-container">
+              <img src="https://mc-heads.net/avatar/GenzVort/120" alt="GenzVort" class="staff-avatar floating-avatar-alt" />
+              <div class="crown-icon">🔥</div>
+            </div>
+            <div class="staff-role owner-role">OWNER</div>
+            <h4 class="staff-username">GenzVort</h4>
+            <div class="staff-desc">Server Owner & Operations Lead</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== TAB 6: ABOUT & SOCIALS ==================== -->
+    <section id="tab-about" class="tab-pane">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-kicker">GET IN TOUCH</span>
+          <h2 class="section-title">ABOUT & <span class="accent-text">CONNECT</span></h2>
+          <div class="flame-line"></div>
+          <p class="about-lead-text">
+            Welcome to <b>HELLGUARD SMP</b> — India's premier survival Minecraft server! Join our rapidly growing community, participate in thrilling events, and connect with us on all our official social platforms.
+          </p>
+        </div>
+
+        <!-- Social & Contact Grid -->
+        <div class="about-grid">
+          <!-- Instagram Card -->
+          <a href="https://www.instagram.com/hellgurad_smp_official?igsi=YjZta2t1MHVlMTIy" target="_blank" class="about-card instagram-card">
+            <div class="about-card-icon instagram-icon">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </div>
+            <div class="about-card-info">
+              <span class="about-card-label">INSTAGRAM</span>
+              <h4 class="about-card-title">@hellgurad_smp_official</h4>
+              <p class="about-card-desc">Follow for daily server reels, announcements, and giveaways!</p>
+            </div>
+            <span class="about-card-arrow">↗</span>
+          </a>
+
+          <!-- YouTube Card -->
+          <a href="https://youtube.com/@hellguardsmp-l8w?si=2sEOQ9xzph3mnGY4" target="_blank" class="about-card youtube-card">
+            <div class="about-card-icon youtube-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </div>
+            <div class="about-card-info">
+              <span class="about-card-label">YOUTUBE</span>
+              <h4 class="about-card-title">@hellguardsmp-l8w</h4>
+              <p class="about-card-desc">Watch epic trailers, PvP highlights, and event streams.</p>
+            </div>
+            <span class="about-card-arrow">↗</span>
+          </a>
+
+          <!-- Discord Card -->
+          <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="about-card discord-card">
+            <div class="about-card-icon discord-icon">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.077.077 0 0 1-.006.128c-.598.344-1.22.645-1.873.891-.043.017-.062.066-.041.107.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+            </div>
+            <div class="about-card-info">
+              <span class="about-card-label">DISCORD</span>
+              <h4 class="about-card-title">Hellguard Community</h4>
+              <p class="about-card-desc">Join tickets, chat with staff, trade, and grab weekly rewards.</p>
+            </div>
+            <span class="about-card-arrow">↗</span>
+          </a>
+
+          <!-- Email Card -->
+          <a href="mailto:hellguardsmp@gamil.com" class="about-card email-card">
+            <div class="about-card-icon email-icon">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l9.518 7.682 9.518-7.682v11.817h-19.036z"/></svg>
+            </div>
+            <div class="about-card-info">
+              <span class="about-card-label">OFFICIAL EMAIL</span>
+              <h4 class="about-card-title">hellguardsmp@gamil.com</h4>
+              <p class="about-card-desc">For partnerships, creator sponsorships, or formal queries.</p>
+            </div>
+            <span class="about-card-arrow">✉</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FLOATING QUICK ACTIONS (Rewards & Discord) -->
+  <div class="floating-quick-actions">
+    <button type="button" class="floating-btn btn-floating-rewards" onclick="switchTab('rewards')">
+      <span>🎁 Rewards</span>
+    </button>
+    <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="floating-btn btn-floating-discord">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.077.077 0 0 1-.006.128c-.598.344-1.22.645-1.873.891-.043.017-.062.066-.041.107.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      <span>Discord</span>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="copyright">© 2026 <b>HELLGUARD SMP</b>. All Rights Reserved. Not an official Minecraft product.</p>
+      <p class="server-ip-reminder">Play Now: <span class="accent-ip" onclick="copyServerIp()">hellguard.abrdns.com</span></p>
+    </div>
+  </footer>
+
+  <!-- PERK MODAL -->
+  <div id="perkModal" class="modal">
+    <div class="modal-backdrop" onclick="closePerkModal()"></div>
+    <div class="modal-box">
+      <button class="modal-close" onclick="closePerkModal()">✕</button>
+      <h3 id="modalRankName">Rank Perks</h3>
+      <div id="modalPerkList" class="modal-perk-list"></div>
+      <div class="modal-footer">
+        <a href="https://discord.gg/5hvXSNxWb" target="_blank" class="btn btn-discord modal-buy-btn">Buy on Discord</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast">Server IP copied to clipboard!</div>
+
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
